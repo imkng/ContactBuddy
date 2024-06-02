@@ -1,12 +1,12 @@
 package com.programming.apiapplication.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.*;
-import org.hibernate.annotations.UuidGenerator;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import javax.persistence.*;
 
 
 @Entity
@@ -19,9 +19,8 @@ import org.hibernate.annotations.UuidGenerator;
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class Contact {
     @Id
-    @UuidGenerator
-    @Column(name = "id", unique = true, updatable = false)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String name;
     private String email;
@@ -30,4 +29,10 @@ public class Contact {
     private String address;
     private String status;
     private String photoUrl;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private User user;
 }

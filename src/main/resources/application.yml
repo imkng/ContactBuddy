@@ -2,7 +2,7 @@
 
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/expensetracker
+    url: jdbc:mysql://localhost:3306/contactapplication
     username: root
     password: root
   jpa:
@@ -30,3 +30,9 @@ server:
     path: user/error
     whitelabel:
       enabled: false
+  servlet:
+    context-path: /api/v1
+jwt:
+  secret: krishna
+
+

@@ -30,17 +30,17 @@ public class ContactResource {
 
     @GetMapping
     public ResponseEntity<Page<Contact>> getContacts(@RequestParam(value = "page", defaultValue = "0") int page,
-                                                     @RequestParam(value = "size", defaultValue = "10") int size){
+                                                     @RequestParam(value = "size", defaultValue = "12") int size){
         return ResponseEntity.ok().body(contactService.getAllContacts(page, size));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Contact> getContact(@PathVariable(value = "id") String id){
+    public ResponseEntity<Contact> getContact(@PathVariable(value = "id") Long id){
         return ResponseEntity.ok().body(contactService.getContact(id));
     }
 
     @PutMapping("/photo")
-    public ResponseEntity<String> uploadPhoto(@RequestParam("id") String id, @RequestParam("file") MultipartFile file){
+    public ResponseEntity<String> uploadPhoto(@RequestParam("id") Long id, @RequestParam("file") MultipartFile file){
         return ResponseEntity.ok().body(contactService.uploadPhoto(id, file));
     }
 
